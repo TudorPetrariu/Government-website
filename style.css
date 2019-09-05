@@ -1,0 +1,75 @@
+
+.about-us{
+  margin-left: 400px;
+}
+.about-container{
+  padding-top: 50px;
+}
+.Congressmen{
+  text-align: center;
+  font-family: sans-serif;
+  padding: 20px;
+}
+.myBtn{
+animation-duration: 3000;
+
+}
+#more{
+  display: none;
+}
+.history{
+  text-align: center;
+}
+.about-us{
+  text-align: center;
+}
+.home-logo{
+  float: right;
+}
+.logo{
+    margin-right: 750px;
+    width: 60px; }
+ 
+.senators{
+ padding: 30px;
+ color: black;
+ text-align-last: center;
+ font-family: sans-serif;
+
+}
+ 
+.mail{
+  height: 30px;
+
+}
+
+thead{
+
+  color:beige;
+  text-align: center;
+  background-color: #d38510ce;
+
+}
+table{
+  width: 70%;
+  background-color:bisque;
+  margin-left: 220px;
+ text-align: center; 
+}
+
+    table td{
+      color:rgb(202, 70, 9);
+    padding: 30px;
+    border: 2px solid black;  
+    
+    }
+.navbar{
+border-radius: 30px;
+margin-top: 60px;
+border: 2px solid black;
+}
+p{
+text-align:center;
+
+font-family: Trebuchet MS;
+}
