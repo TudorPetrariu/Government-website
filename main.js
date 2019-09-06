@@ -1,94 +1,110 @@
 //document.getElementById("senate-data").innerHTML = JSON.stringify(data,null,2);
 // console.log(data.results[0].members)
 const members = data.results[0].members
-let links= members.url
+
+const partyD = members.filter((D) => {
+  return D.party === "R"
+})
 
 
-function generate_table(){
-var body=document.getElementsByTagName("body")[0];
-var tbl=document.createElement("table");
-var header=document.createElement("thead");
-var hRow=document.createElement("tr");
-
-var hCell1=document.createElement("td");
-var hText1=document.createTextNode("Name");
-hCell1.appendChild(hText1);
-hRow.appendChild(hCell1);
-
-var hCell2=document.createElement("td");
-var hText2=document.createTextNode("Party");
-hCell2.appendChild(hText2);
-hRow.appendChild(hCell2);
-
-var hCell3=document.createElement("td");
-var hText3=document.createTextNode("States");
-hCell3.appendChild(hText3);
-hRow.appendChild(hCell3);
-
-var hCell4=document.createElement("td");
-var hText4=document.createTextNode("Years in Office");
-hCell4.appendChild(hText4);
-hRow.appendChild(hCell4);
-
-var hCell5=document.createElement("td");
-var hText5=document.createTextNode("%Votes w/Party");
-hCell5.appendChild(hText5);
-hRow.appendChild(hCell5);
-
-header.appendChild(hRow);
-tbl.appendChild(header);
-var tblBody=document.createElement("tbody");
 
 
-for(i=0; i<members.length ; i++){
-    var row=document.createElement("tr");
-   if( members[i].middle_name == null){
-    members[i].middle_name=""
-   }
-    row.insertCell().innerHTML = (members[i].first_name + " " +members[i].middle_name+" " + members[i].last_name).link(members[i].url)
+function generateTable(members) {
+
+  var tbl = document.getElementById('table')
+  tbl.innerHTML = "";
+  var header = document.createElement("thead");
+  var hRow = document.createElement("tr");
+
+  var hCell1 = document.createElement("td");
+  var hText1 = document.createTextNode("Name");
+  hCell1.appendChild(hText1);
+  hRow.appendChild(hCell1);
+
+  var hCell2 = document.createElement("td");
+  var hText2 = document.createTextNode("Party");
+  hCell2.appendChild(hText2);
+  hRow.appendChild(hCell2);
+
+  var hCell3 = document.createElement("td");
+  var hText3 = document.createTextNode("States");
+  hCell3.appendChild(hText3);
+  hRow.appendChild(hCell3);
+
+  var hCell4 = document.createElement("td");
+  var hText4 = document.createTextNode("Years in Office");
+  hCell4.appendChild(hText4);
+  hRow.appendChild(hCell4);
+
+  var hCell5 = document.createElement("td");
+  var hText5 = document.createTextNode("%Votes w/Party");
+  hCell5.appendChild(hText5);
+  hRow.appendChild(hCell5);
+
+  header.appendChild(hRow);
+  tbl.appendChild(header);
+  var tblBody = document.createElement("tbody");
+
+
+  for (i = 0; i < members.length; i++) {
+    var row = document.createElement("tr");
+
+    if (members[i].middle_name == null) {
+      members[i].middle_name = ""
+    }
+
+    row.insertCell().innerHTML = (members[i].first_name + " " + members[i].middle_name + " " + members[i].last_name).link(members[i].url)
     row.insertCell().innerHTML = members[i].party;
     row.insertCell().innerHTML = members[i].state;
     row.insertCell().innerHTML = members[i].seniority;
     row.insertCell().innerHTML = members[i].votes_with_party_pct;
-  
-  
-
     tblBody.appendChild(row);
 
-
+  }
+  tbl.appendChild(tblBody);
 }
-tbl.appendChild(tblBody);
-body.appendChild(tbl);
 
-}
- generate_table()
+generateTable(members)
 
- function myFunction() {
-    var dots = document.getElementById("dots");
-    var moreText = document.getElementById("more");
-    var btnText = document.getElementById("myBtn");
-  
-    if (dots.style.display === "none") {
-      dots.style.display = "inline";
-      btnText.innerHTML = "Read more"; 
-      moreText.style.display = "none";
-    } else {
-      dots.style.display = "none";
-      btnText.innerHTML = "Read less"; 
-      moreText.style.display = "inline";
+function filterMembers() {
+  // let selectedValues = [...document.querySelectorAll('input:checked')].map(checkbox => checkbox.value);
+  // console.log(selectedValues)
+  let selected = [];
+  var boxes = document.getElementsByTagName("INPUT");
+  let select = document.getElementById("selectstate");
+  console.log(select.value)
+  for (var i = 0; i < boxes.length; i++) {
+    var box = boxes[i];
+    if (box.checked) {
+      selected.push(box.value)
     }
   }
-  function Read() {
-    var dots = document.getElementById("less");
-    var moreText = document.getElementById("more");
-    var btnText = document.getElementById("myBtn");
-    if (dots.style.display === "none") {
-      dots.style.display = "inline";
-      btnText.innerHTML = "Read more"; 
-      moreText.style.display = "none";
-    } else {
-      dots.style.display = "none";
-      btnText.innerHTML = "Read less"; 
-      moreText.style.display = "inline";
+  //  let filteredMembers = members.filer(member => selected.includes(member.party))
+  let filtered = [];
+  for (let i = 0; i < members.length; i++) {
+    if (selected.includes(members[i].party) && (members[i].state == select.value || select.value == "all")) {
+      filtered.push(members[i])
     }
   }
+
+  if (filtered.length > 0) {
+    generateTable(filtered)
+  } else {
+    alert("select something")
+  }
+
+}
+
+let select = document.getElementById("selectstate");
+for (let i = 0; i < members.length; i++) {
+  let states = members[i].state;
+  let options = document.createElement("option");
+  options.innerHTML = states;
+  select.appendChild(options);
+}
+
+
+document.getElementById("Democrat").addEventListener("click", filterMembers);
+document.getElementById("Republican").addEventListener("click", filterMembers);
+document.getElementById("Individual").addEventListener("click", filterMembers);
+document.getElementById("selectstate").addEventListener("change", filterMembers)
