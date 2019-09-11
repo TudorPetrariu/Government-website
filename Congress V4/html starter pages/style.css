@@ -1,0 +1,119 @@
+#state {
+  margin-right: 20px;
+}
+
+.btn {
+  height: 35px;
+  background-color: rgba(31, 194, 194, 0.774);
+  width: 40%;
+  margin-right: 5px;
+
+}
+
+.btn-group {
+  float: right;
+  margin-right: 18%;
+}
+
+#checkbox {
+  margin-left: 220px;
+
+}
+
+#myDiv {
+  display: none;
+}
+
+.about-us {
+  margin-left: 550px;
+}
+
+.about-container {
+  margin-top: 80px;
+}
+
+.Congressmen {
+  text-align: center;
+  font-family: sans-serif;
+  padding: 20px;
+  margin-right: 100px;
+}
+
+.myBtn {
+  animation-duration: 3000;
+
+}
+
+#more {
+  display: none;
+}
+
+.history {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.about-us {
+  text-align: center;
+  font-family: sans-serif;
+
+}
+
+.home-logo {
+  float: right;
+}
+
+.logo {
+  margin-right: 800px;
+  width: 60px;
+}
+
+.senators {
+  padding: 30px;
+  color: black;
+  text-align-last: center;
+  font-family: sans-serif;
+  margin-right: 100px;
+
+}
+
+.mail {
+  height: 30px;
+
+}
+
+thead {
+
+
+  text-align: center;
+  background-color: rgb(30, 196, 179);
+
+}
+
+table {
+  width: 70%;
+  border: 3px solid black;
+  margin-left: 220px;
+  text-align: center;
+}
+
+table td {
+  color: rgb(202, 9, 9);
+  padding: 30px;
+
+
+}
+
+.navbar {
+  border-radius: 30px;
+  margin-top: 60px;
+  border: 2px solid black;
+}
+
+p {
+  text-align: center;
+
+  font-family: Trebuchet MS;
+}
