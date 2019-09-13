@@ -17,9 +17,9 @@ for (var i = 0; i < members.length; i++) {
         }
     }
 }
-// console.log(republicans)
-// console.log(democrats)
-// console.log(independets)
+console.log(republicans)
+console.log(democrats)
+console.log(independets)
 
 // votes_with_party_pct
 
