@@ -7,19 +7,23 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
+
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand">TGIF</a>
-
+    <a class="navbar-brand" href="#"> TGIF </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="/html starter pages/home-starter-page.html">Home</a>
+          <a class="nav-link" href="/html starter pages/home-starter-page.html">Home </a>
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             Congress 113
           </a>
@@ -29,13 +33,38 @@
           </div>
         </li>
 
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Attendance
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/html starter pages/house-attendance-starter-page.html">House</a>
+            <a class="dropdown-item" href="/html starter pages/senate-attendance-starter-page.html">Senate</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Party Loyalty
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/html starter pages/house-party-loyalty-starter-page.html">House</a>
+            <a class="dropdown-item" href="/html starter pages/senate-party-loyalty-starter-page.html">Senate</a>
+          </div>
+        </li>
+
+        <h2 class="about-us">About Us</h2>
       </ul>
     </div>
 
-    <img class="logo" src="Task 2 Home.png">
     <img class="mail" src="/html starter pages/mail.png">
     <a class="link" href="http://info@tgif.net">info@tgif.net</a>
+
   </nav>
+
+  <!--Table container-->
   <div>
     <h2 class="Congressmen">Congressmen</h2>
     <p>The major power of the House is to pass federal legislation that affects the entire country, although its bills
@@ -49,7 +78,7 @@
 
     <div class="btn-group">
       <label id="state">Filter by state:</label>
-      <select id="selectstate" class="btn btn-info dropdown-toggle">
+      <select id="selectstate" class="btn btn-info dropdown-toggle" aria-expanded="false">
         <div class="dropdown-menu">
           <option value='all' class="dropdown-item">--All--</option>
       </select>

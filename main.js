@@ -1,10 +1,9 @@
 //document.getElementById("senate-data").innerHTML = JSON.stringify(data,null,2);
 // console.log(data.results[0].members)
 const members = data.results[0].members
+let links = members.url
+let party = members.party
 
-const partyD = members.filter((D) => {
-  return D.party === "R"
-})
 
 
 
@@ -58,13 +57,25 @@ function generateTable(members) {
     row.insertCell().innerHTML = members[i].state;
     row.insertCell().innerHTML = members[i].seniority;
     row.insertCell().innerHTML = members[i].votes_with_party_pct;
+
+
+
     tblBody.appendChild(row);
 
   }
+
   tbl.appendChild(tblBody);
+
+
+
+
 }
 
+
+
 generateTable(members)
+
+
 
 function filterMembers() {
   // let selectedValues = [...document.querySelectorAll('input:checked')].map(checkbox => checkbox.value);
@@ -72,7 +83,6 @@ function filterMembers() {
   let selected = [];
   var boxes = document.getElementsByTagName("INPUT");
   let select = document.getElementById("selectstate");
-  console.log(select.value)
   for (var i = 0; i < boxes.length; i++) {
     var box = boxes[i];
     if (box.checked) {
@@ -84,9 +94,11 @@ function filterMembers() {
   for (let i = 0; i < members.length; i++) {
     if (selected.includes(members[i].party) && (members[i].state == select.value || select.value == "all")) {
       filtered.push(members[i])
-    }
-  }
 
+
+    }
+
+  }
   if (filtered.length > 0) {
     generateTable(filtered)
   } else {
@@ -95,13 +107,23 @@ function filterMembers() {
 
 }
 
+
+
+let allStates = []
 let select = document.getElementById("selectstate");
 for (let i = 0; i < members.length; i++) {
-  let states = members[i].state;
-  let options = document.createElement("option");
-  options.innerHTML = states;
-  select.appendChild(options);
+  let eachState = members[i].state;
+  allStates.push(eachState)
+
 }
+var allUnique = allStates.filter((item, index) => allStates.indexOf(item) === index).sort()
+for (i = 0; i < allUnique.length; i++) {
+  let unique = allUnique[i]
+  let options = document.createElement("option");
+  options.innerHTML = unique;
+  select.appendChild(options)
+}
+
 
 
 document.getElementById("Democrat").addEventListener("click", filterMembers);

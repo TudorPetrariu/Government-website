@@ -86,7 +86,7 @@
 
 thead {
 
-  color: beige;
+
   text-align: center;
   background-color: rgb(30, 196, 179);
 
@@ -94,7 +94,7 @@ thead {
 
 table {
   width: 70%;
-  background-color: rgb(196, 255, 252);
+  border: 3px solid black;
   margin-left: 220px;
   text-align: center;
 }
