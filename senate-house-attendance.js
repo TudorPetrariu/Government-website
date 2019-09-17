@@ -16,93 +16,113 @@ let statistics = [{
     {
         Party: "Independent",
         Number: 0,
-        PartyVotesPercentage: 0,
+        PartyVotesPercentage: 0
 
 
     },
     {
         Total: "Total",
         TotalNumber: 0,
-        TotalPercentageVotes: 0,
+        TotalPercentageVotes: 0
 
 
     },
 
 
 ];
-// let statistics = {
-//     "Number of Democrats": 204,
-//     "Number of Republicans": 252,
-//     "Number of Independents": 0,
-//     "Total": 0,
-//     "%Voted w/ Party Democrats": 0,
-//     "%Voted w/ Party Republicans": 0,
-//     "%Voted w/ Party Independents": 0,
-//     "%Voted w/ Party Total": 0,
-//     "Least Engaged Loyal": [],
-//     "Most Engaged Loyal": [],
-//     "Least Engaged Attendance": [],
-//     "Most Engaged Attendance": []
-// }
 
+
+let numberVotes = []
+pureVootes = []
+for (j = 0; j < members.length; j++) {
+    let allNumberVotes = members[j].total_votes
+    numberVotes.push(allNumberVotes)
+    numberVotesSum = numberVotes.reduce((a, b) => a + b, 0)
+    if (allNumberVotes !== null && allNumberVotes !== 0) {
+        let pureVotes = Math.round(members[j].total_votes * (members[j].votes_with_party_pct / 100))
+
+
+        pureVootes.push(pureVotes)
+        sumPureVotes = pureVootes.reduce((a, b) => a + b, 0)
+    }
+}
 let allMemberVotes = []
 dSum = []
 rSum = []
 iSum = []
-let numberVotes = []
+dVotes = []
+rVotes = []
+iVotes = []
 
 
+for (let i = 0; i < members.length; i++) {
 
-for (var i = 0; i < members.length; i++) {
-    let allNumberVotes = members[i].total_votes
-
-    numberVotes.push(allNumberVotes)
-    numberVotesSum = numberVotes.reduce((a, b) => a + b, 0)
-    console.log(numberVotesSum)
-
-    var allParty = members[i].party
-    var pctVotes = members[i].votes_with_party_pct
+    let allParty = members[i].party
+    separatedVotes = members[i].total_votes
+    actualDvotes = 0
+    actualRvotes = 0
+    actualIvotes = 0
 
     let democratSum = Math.round(dSum.reduce((a, b) => a + b, 0))
     let republicanSum = Math.round(rSum.reduce((a, b) => a + b, 0))
     let independentSum = Math.round(iSum.reduce((a, b) => a + b, 0))
 
-    statistics[3].TotalPercentageVotes = (statistics[0].Number * 0.88) + (statistics[1].Number * 0.94) + (statistics[2].Number * 0.43)
+    sumDVotes = Math.round(dVotes.reduce((a, b) => a + b, 0))
+    sumRVotes = Math.round(rVotes.reduce((a, b) => a + b, 0))
+    sumIVotes = Math.round(iVotes.reduce((a, b) => a + b, 0))
+
+
     if (allParty.includes("D")) {
         statistics[0].Number++;
         allMemberVotes.push(members[i])
-        dSum.push(pctVotes)
-        statistics[0].PartyVotesPercentage = Math.round(democratSum / statistics[0].Number);
-
+        dSum.push(separatedVotes)
+        if (members[i].total_votes !== 0) {
+            actualDvotes = Math.round(members[i].total_votes * (members[i].votes_with_party_pct / 100))
+            dVotes.push(actualDvotes)
+            statistics[0].PartyVotesPercentage = Math.round((sumDVotes / democratSum) * 100);
+        }
     } else if (allParty.includes("R")) {
         statistics[1].Number++;
         allMemberVotes.push(members[i])
-        rSum.push(pctVotes)
-        statistics[1].PartyVotesPercentage = Math.round(republicanSum / statistics[1].Number);
+        rSum.push(separatedVotes)
+        if (members[i].missed_votes !== null) {
+            actualRvotes = Math.round(members[i].total_votes * (members[i].votes_with_party_pct / 100))
+            rVotes.push(actualRvotes)
 
+            statistics[1].PartyVotesPercentage = Math.round((sumRVotes / republicanSum) * 100);
+        }
 
 
     } else if (allParty.includes("I")) {
         statistics[2].Number++;
         allMemberVotes.push(members[i])
-        iSum.push(pctVotes)
-        statistics[2].PartyVotesPercentage = Math.round(independentSum / statistics[2].Number);
+        iSum.push(separatedVotes)
+
+        actualIvotes = Math.round(members[i].total_votes * (members[i].votes_with_party_pct / 100))
+        iVotes.push(actualIvotes)
+
+        statistics[2].PartyVotesPercentage = Math.round((sumIVotes / independentSum) * 100);
 
 
 
 
     }
-
-
     statistics[3].TotalNumber = statistics[0].Number + statistics[1].Number + statistics[2].Number
 
+
+    statistics[3].TotalPercentageVotes = Math.round((sumPureVotes / numberVotesSum) * 100)
+
 }
+
+
+
 
 function generateTableHead(table, info) {
 
     let thead = table.createTHead();
     let row = thead.insertRow();
     for (key of info) {
+
         let th = document.createElement("th");
         let text = document.createTextNode(key);
         th.appendChild(text);
@@ -114,12 +134,15 @@ function genTable(table, info) {
     for (element of info) {
         let row = table.insertRow();
         for (key in element) {
+
+
             let cell = row.insertCell();
             let text = document.createTextNode(element[key])
             cell.appendChild(text)
         }
     }
 }
+
 let table = document.getElementById("GlanceTable");
 
 let info = Object.keys(statistics[0])
@@ -134,11 +157,10 @@ generateTableHead(table, info)
 
 let mostMissedVotesMembers = allMemberVotes.sort((a, b) => parseFloat(b.missed_votes) - parseFloat(a.missed_votes));
 let most10PercentMissed = mostMissedVotesMembers[Math.round(mostMissedVotesMembers.length * 0.1)].missed_votes;
-
 worstTop = []
 for (j = 0; j < mostMissedVotesMembers.length; j++) {
     let mostVotes = mostMissedVotesMembers[j]
-    if (mostVotes.missed_votes >= most10PercentMissed) {
+    if (mostVotes.missed_votes >= most10PercentMissed && mostVotes.missed_votes !== null && mostVotes.missed_votes !== undefined) {
         worstTop.push(mostVotes)
     }
 }
@@ -146,10 +168,11 @@ for (j = 0; j < mostMissedVotesMembers.length; j++) {
 let leastMissedVotesMembers = allMemberVotes.sort((a, b) => parseFloat(a.missed_votes) - parseFloat(b.missed_votes));
 let least10PercentMissed = leastMissedVotesMembers[Math.round(leastMissedVotesMembers.length * 0.1)].missed_votes
 
+
 bestTop = []
 for (i = 0; i < leastMissedVotesMembers.length; i++) {
     let leastVotes = leastMissedVotesMembers[i]
-    if (leastVotes.missed_votes <= least10PercentMissed) {
+    if (leastVotes.missed_votes <= least10PercentMissed && leastVotes.missed_votes !== null) {
         bestTop.push(leastVotes)
 
     }
@@ -187,11 +210,14 @@ function generateTopTable(id, top) {
     for (i = 0; i < top.length; i++) {
         var row = document.createElement("tr");
 
-        row.insertCell().innerHTML = top[i].first_name + " " + top[i].last_name
+
+
+        row.insertCell().innerHTML = (top[i].first_name + " " + top[i].last_name).link(top[i].url)
         row.insertCell().innerHTML = top[i].missed_votes;
         row.insertCell().innerHTML = top[i].missed_votes_pct;
 
         tblBody.appendChild(row);
+
     }
 
     tbl.appendChild(tblBody);
