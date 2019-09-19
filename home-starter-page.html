@@ -11,7 +11,10 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/html starter pages/home-starter-page.html"> TGIF </a>
-
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
@@ -128,15 +131,12 @@
     function Read() {
 
       var x = document.getElementById("myDiv")
-      console.log(x.style.display, x.style.display === "none", x.style.display == "none")
       var btnText = document.getElementById("myBtn")
       if (x.style.display === "none" || !x.style.display) {
-        console.log('hello')
         x.style.display = "block";
         btnText.innerHTML = "Less Info"
 
       } else {
-        console.log('hello')
         x.style.display = "block";
         btnText.innerHTML = "More Info"
         x.style.display = "none";

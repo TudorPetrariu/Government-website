@@ -41,7 +41,6 @@ for (j = 0; j < members.length; j++) {
     if (allNumberVotes !== null && allNumberVotes !== 0) {
         let pureVotes = Math.round(members[j].total_votes * (members[j].votes_with_party_pct / 100))
 
-
         pureVootes.push(pureVotes)
         sumPureVotes = pureVootes.reduce((a, b) => a + b, 0)
     }
@@ -62,7 +61,6 @@ for (let i = 0; i < members.length; i++) {
     actualDvotes = 0
     actualRvotes = 0
     actualIvotes = 0
-
     let democratSum = Math.round(dSum.reduce((a, b) => a + b, 0))
     let republicanSum = Math.round(rSum.reduce((a, b) => a + b, 0))
     let independentSum = Math.round(iSum.reduce((a, b) => a + b, 0))
@@ -79,6 +77,7 @@ for (let i = 0; i < members.length; i++) {
         if (members[i].total_votes !== 0) {
             actualDvotes = Math.round(members[i].total_votes * (members[i].votes_with_party_pct / 100))
             dVotes.push(actualDvotes)
+
             statistics[0].PartyVotesPercentage = Math.round((sumDVotes / democratSum) * 100);
         }
     } else if (allParty.includes("R")) {
@@ -91,7 +90,6 @@ for (let i = 0; i < members.length; i++) {
 
             statistics[1].PartyVotesPercentage = Math.round((sumRVotes / republicanSum) * 100);
         }
-
 
     } else if (allParty.includes("I")) {
         statistics[2].Number++;
@@ -151,6 +149,27 @@ generateTableHead(table, info)
 
 
 
+// let leastLoyal = members.sort((a, b) => a.votes_with_party_pct - b.votes_with_party_pct);
+// let leastLoyalTop10Percent = leastLoyal[Math.round(leastLoyal.length * 0.1)].votes_with_party_pct
+// console.log(leastLoyal)
+// leastLoyalTop = []
+// for (i = 0; i < leastLoyal.length; i++) {
+//     if (leastLoyal[i].votes_with_party_pct <= leastLoyalTop10Percent) {
+//         leastLoyalTop.push(leastLoyal[i])
+//     }
+// }
+
+// let mostLoyal = members.sort((a, b) => b.votes_with_party_pct - a.votes_with_party_pct);
+// let mostLoyalTop10Percent = mostLoyal[Math.round(mostLoyal.length * 0.1)].votes_with_party_pct
+// console.log(mostLoyal)
+// mostLoyalTop = []
+// for (i = 0; i < mostLoyal.length; i++) {
+//     moostLoyal = mostLoyal[i]
+//     if (moostLoyal.votes_with_party_pct >= mostLoyalTop10Percent) {
+//         mostLoyalTop.push(moostLoyal)
+//     }
+
+// }
 
 
 
@@ -225,5 +244,7 @@ function generateTopTable(id, top) {
 
 }
 
-generateTopTable("least", worstTop)
-generateTopTable("most", bestTop)
+// generateTopTable("leastLoyal", leastLoyalTop)
+// generateTopTable("mostLoyal", mostLoyalTop)
+generateTopTable("leastEngaged", worstTop)
+generateTopTable("mostEngaged", bestTop)
