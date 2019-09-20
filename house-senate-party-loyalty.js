@@ -25,12 +25,13 @@ for (i = 0; i < members.length; i++) {
     totalPureVotesSum = Math.round(totalPureVotes.reduce((a, b) => a + b, 0))
 
     dTotalVotesSum = dTotalVotes.reduce((a, b) => a + b, 0)
+    dPureVotes = Math.round(dTotalVotesSum * (members[i].votes_with_party_pct / 100))
 
     if (members[i].party.includes("D")) {
         statistics["Number of Democrats"]++
         statistics["%Voted w/ Party Democrats"] = Math.round((members[i].total_votes * (members[i].votes_with_party_pct / 100) / members[i].total_votes) * 100)
         dTotalVotes.push(members[i].total_votes)
-        dPureVotes = dTotalVotesSum * (members[i].votes_with_party_pct / 100)
+
     }
     if (members[i].party.includes("R")) {
         statistics["Number of Republicans"]++
@@ -53,11 +54,13 @@ for (i = 0; i < members.length; i++) {
 
 }
 
-// console.log(dTotalVotes)
-// console.log(statistics["%Voted w/ Party Democrats"])
-// console.log(statistics["%Voted w/ Party Republicans"])
-// console.log(statistics["%Voted w/ Party Independents"])
-// console.log(statistics["%Voted w/ Party Total"])
+console.log(dTotalVotesSum)
+console.log(dPureVotes)
+
+console.log(statistics["%Voted w/ Party Democrats"])
+console.log(statistics["%Voted w/ Party Republicans"])
+console.log(statistics["%Voted w/ Party Independents"])
+console.log(statistics["%Voted w/ Party Total"])
 
 
 let leastLoyal = members.sort((a, b) => a.votes_with_party_pct - b.votes_with_party_pct);

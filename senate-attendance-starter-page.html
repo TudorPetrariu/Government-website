@@ -57,7 +57,6 @@
                     </div>
                 </li>
 
-                <h2 class="about-us">About Us</h2>
             </ul>
         </div>
 
@@ -68,36 +67,46 @@
 
 
 
-    <header>
-        <div>
-        </div>
-    </header>
+
     <!--Table container-->
     <div>
-        <h2>Attendance</h2>
-        <p>The Constitution specifies that a majority of members constitutes a quorum to do business in each house.
+        <h2 class="pagetitle">Attendance</h2>
+        <p class="ptable">The Constitution specifies that a majority of members constitutes a quorum to do business in
+            each house.
             Representatives and senators rarely force the presence of a quorum by demanding quorum calls; thus, in most
             cases, debates continue even if a majority is not present.</p>
 
-        <p>The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator stating "aye"
+        <p class="ptable">The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator
+            stating "aye"
             or "no" when his or her name is announced. The House reserves roll-call votes for the most formal matters,
             as a roll-call of all 435 representatives takes quite some time; normally, members vote by electronic
             device. In the case of a tie, the motion in question fails. In the Senate, the Vice President may (if
             present) cast the tiebreaking vote.</p>
 
-        <h2>Senate at a glance</h2>
+        <h2 class="tablehead">Senate at a glance</h2>
         <table id="GlanceTable"></table>
 
 
-        <h2>Least Engaged (Bottom 10% Attendance)</h2>
-        <table id="leastEngaged"></table>
+        <h2 class="tablehead">Least Engaged (Bottom 10% Attendance)</h2>
+        <table id="leastEngaged">
+            <th>Name</th>
+            <th>No. Missed Votes</th>
+            <th>% Missed </th>
 
-        <h2>Most Engaged (Top 10% Attendance)</h2>
-        <table id="mostEngaged"> </table>
+
+        </table>
+
+        <h2 class="tablehead">Most Engaged (Top 10% Attendance)</h2>
+        <table id="mostEngaged">
+            <th>Name</th>
+            <th>No. Missed Votes</th>
+            <th>% Missed </th>
+
+        </table>
 
     </div>
     <script src="/html starter pages/pro-congress-113-senate.js"></script>
-    <script src="/html starter pages/senate-house-attendance.js"></script>
+    <script src="/html starter pages/senate-house-attendance-party-loyalty.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
