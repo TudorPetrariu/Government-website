@@ -1,9 +1,41 @@
-//document.getElementById("senate-data").innerHTML = JSON.stringify(data,null,2);
-// console.log(data.results[0].members)
-const members = data.results[0].members
-let links = members.url
-let party = members.party
+//Global Variables
 
+let members = [];
+if (location.pathname == "/html%20starter%20pages/senate-starter-page.html") {
+  url = "https://api.propublica.org/congress/v1/113/senate/members.json";
+
+  getData(url);
+}
+if (location.pathname == "/html%20starter%20pages/house-starter-page.html") {
+  url = "https://api.propublica.org/congress/v1/113/house/members.json";
+
+  getData(url);
+
+}
+
+//Function Definition
+
+async function getData(url) {
+  let key = "QnkcksP0Rnbsidg1ytUXGMMj9ocWwHHQUaxhBblS";
+  members = await fetch(url, {
+      method: "GET",
+      headers: new Headers({
+        "X-API-Key": key
+      })
+    })
+    .then(response => response.json())
+    .then(data => data.results[0].members)
+    .catch(err => console.error(err));
+  console.log(members);
+
+  fillStateDropDown();
+  generateTable(members);
+}
+
+document.getElementById("Democrat").addEventListener("click", filterMembers);
+document.getElementById("Republican").addEventListener("click", filterMembers);
+document.getElementById("Individual").addEventListener("click", filterMembers);
+document.getElementById("selectstate").addEventListener("change", filterMembers);
 
 
 
@@ -44,7 +76,6 @@ function generateTable(members) {
   tbl.appendChild(header);
   var tblBody = document.createElement("tbody");
 
-
   for (i = 0; i < members.length; i++) {
     var row = document.createElement("tr");
 
@@ -60,22 +91,15 @@ function generateTable(members) {
 
 
 
-    tblBody.appendChild(row);
 
+    tblBody.appendChild(row);
   }
 
   tbl.appendChild(tblBody);
 
 
 
-
 }
-
-
-
-generateTable(members)
-
-
 
 function filterMembers() {
   // let selectedValues = [...document.querySelectorAll('input:checked')].map(checkbox => checkbox.value);
@@ -107,26 +131,20 @@ function filterMembers() {
 
 }
 
+function fillStateDropDown() {
 
+  let allStates = []
+  let select = document.getElementById("selectstate");
+  for (let i = 0; i < members.length; i++) {
+    let eachState = members[i].state;
+    allStates.push(eachState)
 
-let allStates = []
-let select = document.getElementById("selectstate");
-for (let i = 0; i < members.length; i++) {
-  let eachState = members[i].state;
-  allStates.push(eachState)
-
+  }
+  var allUnique = allStates.filter((item, index) => allStates.indexOf(item) === index).sort()
+  for (i = 0; i < allUnique.length; i++) {
+    let unique = allUnique[i]
+    let options = document.createElement("option");
+    options.innerHTML = unique;
+    select.appendChild(options)
+  }
 }
-var allUnique = allStates.filter((item, index) => allStates.indexOf(item) === index).sort()
-for (i = 0; i < allUnique.length; i++) {
-  let unique = allUnique[i]
-  let options = document.createElement("option");
-  options.innerHTML = unique;
-  select.appendChild(options)
-}
-
-
-
-document.getElementById("Democrat").addEventListener("click", filterMembers);
-document.getElementById("Republican").addEventListener("click", filterMembers);
-document.getElementById("Individual").addEventListener("click", filterMembers);
-document.getElementById("selectstate").addEventListener("change", filterMembers)
