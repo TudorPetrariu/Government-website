@@ -1,5 +1,6 @@
 //Global Variables
 
+
 let members = [];
 if (location.pathname == "/html%20starter%20pages/senate-starter-page.html") {
   url = "https://api.propublica.org/congress/v1/113/senate/members.json";
@@ -17,6 +18,7 @@ if (location.pathname == "/html%20starter%20pages/house-starter-page.html") {
 
 async function getData(url) {
   let key = "QnkcksP0Rnbsidg1ytUXGMMj9ocWwHHQUaxhBblS";
+  document.body.className = "loading"
   members = await fetch(url, {
       method: "GET",
       headers: new Headers({
@@ -26,11 +28,30 @@ async function getData(url) {
     .then(response => response.json())
     .then(data => data.results[0].members)
     .catch(err => console.error(err));
+
+  document.body.className = "";
+
+
+
+
+
   console.log(members);
 
   fillStateDropDown();
   generateTable(members);
-}
+};
+
+
+// let result = getData(url)
+
+// function loading(result) {
+//   if (result == true) {
+//     loader.style.opacity = 0;
+//     loader.style.display = 'none';
+
+//   }
+// }
+// loading(result)
 
 document.getElementById("Democrat").addEventListener("click", filterMembers);
 document.getElementById("Republican").addEventListener("click", filterMembers);
@@ -57,6 +78,7 @@ function generateTable(members) {
   hCell2.appendChild(hText2);
   hRow.appendChild(hCell2);
 
+
   var hCell3 = document.createElement("td");
   var hText3 = document.createTextNode("States");
   hCell3.appendChild(hText3);
@@ -78,7 +100,6 @@ function generateTable(members) {
 
   for (i = 0; i < members.length; i++) {
     var row = document.createElement("tr");
-
     if (members[i].middle_name == null) {
       members[i].middle_name = ""
     }
@@ -100,6 +121,7 @@ function generateTable(members) {
 
 
 }
+
 
 function filterMembers() {
   // let selectedValues = [...document.querySelectorAll('input:checked')].map(checkbox => checkbox.value);

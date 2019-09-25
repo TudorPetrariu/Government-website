@@ -1,5 +1,8 @@
 // const members = data.results[0].members
 
+
+
+
 let members = [];
 
 let statistics = [{
@@ -54,6 +57,8 @@ if (location.pathname == "/html%20starter%20pages/house-attendance-starter-page.
 
 async function fetchData(url) {
     let key = "QnkcksP0Rnbsidg1ytUXGMMj9ocWwHHQUaxhBblS"
+    document.body.className = "loading"
+
     members = await fetch(url, {
             method: "GET",
             headers: new Headers({
@@ -63,6 +68,8 @@ async function fetchData(url) {
         .then(response => response.json())
         .then(data => data.results[0].members)
         .catch(err => console.error(err))
+    document.body.className = "";
+
 
     console.log(members);
     fillStatistics();
