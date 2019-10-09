@@ -6,31 +6,31 @@
 let members = [];
 
 let statistics = [{
-        Party: "Democrat",
-        Number: 0,
-        PartyVotesPercentage: 0
+    Party: "Democrat",
+    Number: 0,
+    PartyVotesPercentage: 0
 
-    },
-    {
-        Party: "Republican",
-        Number: 0,
-        PartyVotesPercentage: 0
+},
+{
+    Party: "Republican",
+    Number: 0,
+    PartyVotesPercentage: 0
 
-    },
-    {
-        Party: "Independent",
-        Number: 0,
-        PartyVotesPercentage: 0
-
-
-    },
-    {
-        Total: "Total",
-        TotalNumber: 0,
-        TotalPercentageVotes: 0
+},
+{
+    Party: "Independent",
+    Number: 0,
+    PartyVotesPercentage: 0
 
 
-    },
+},
+{
+    Total: "Total",
+    TotalNumber: 0,
+    TotalPercentageVotes: 0
+
+
+},
 
 
 ];
@@ -60,11 +60,11 @@ async function fetchData(url) {
     document.body.className = "loading"
 
     members = await fetch(url, {
-            method: "GET",
-            headers: new Headers({
-                "X-API-KEY": key
-            })
+        method: "GET",
+        headers: new Headers({
+            "X-API-KEY": key
         })
+    })
         .then(response => response.json())
         .then(data => data.results[0].members)
         .catch(err => console.error(err))
@@ -98,7 +98,7 @@ function generateTopTable(id, top) {
 
 
             row.insertCell().innerHTML = (top[i].first_name + " " + top[i].last_name).link(top[i].url)
-            row.insertCell().innerHTML = top[i].total_votes;
+            row.insertCell().innerHTML = top[i].total_votes
             row.insertCell().innerHTML = top[i].votes_with_party_pct;
 
         }

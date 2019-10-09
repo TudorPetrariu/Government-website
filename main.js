@@ -14,7 +14,7 @@ if (location.pathname == "/html%20starter%20pages/house-starter-page.html") {
 
 }
 
-//Function Definition
+
 
 async function getData(url) {
   let key = "QnkcksP0Rnbsidg1ytUXGMMj9ocWwHHQUaxhBblS";

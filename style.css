@@ -61,10 +61,12 @@ body.loading .lds-ripple {
 
 .tablehead {
   text-align: center;
+  font-size: 20px;
 }
 
 .pagetitle {
   margin-left: 20px;
+  font-size: 20px;
 }
 
 .ptable {
@@ -122,16 +124,16 @@ body.loading .lds-ripple {
 
 
 .history {
-  font-size: 30px;
+  font-size: 20px;
   display: flex;
   justify-content: center;
   margin-top: 5%;
-
+  padding: 20px;
 }
 
 p {
   text-align: center;
-  font-size: 20px;
+  font-size: 17px;
   font-family: Trebuchet MS;
 }
 
@@ -200,4 +202,8 @@ table td {
   margin-top: 60px;
   margin-bottom: 20px;
   border: 2px solid black;
+}
+
+body {
+  background-color: #eceff1
 }
